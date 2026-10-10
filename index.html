@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,5 +36,91 @@
     <p>This page is running inside a Docker container.</p>
     <p><code>Dockerfile → Image → Container</code></p>
   </div>
+=======
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="A hands-on Docker project: serving a custom static webpage with Nginx in an unprivileged container.">
+  <title>Docker Nginx Web Server</title>
+  <style>
+    :root { color-scheme: dark; --bg:#07111f; --panel:#0d1b2b; --line:#20354a; --text:#edf5ff; --muted:#9cb0c7; --cyan:#63e6f2; --blue:#4d9cff; --green:#7ce7b0; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(ellipse at 78% 2%,#123453 0,transparent 34%),radial-gradient(ellipse at 8% 42%,#10243b 0,transparent 36%),var(--bg); }
+    .shell { width:min(1080px,calc(100% - 40px)); margin:0 auto; padding:30px 0 26px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:25px; border-bottom:1px solid rgba(156,176,199,.17); }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:750; letter-spacing:.02em; }
+    .whale { width:40px; height:40px; display:grid; place-items:center; border:1px solid #28516d; border-radius:13px; background:#0d2a40; color:var(--cyan); font-size:23px; }
+    .eyebrow { color:var(--cyan); text-transform:uppercase; letter-spacing:.17em; font-size:11px; font-weight:800; }
+    .status { display:inline-flex; align-items:center; gap:8px; border:1px solid #245744; background:#102d2a; color:#a5f2c9; border-radius:999px; padding:8px 12px; font-size:12px; font-weight:700; white-space:nowrap; }
+    .dot { width:7px; height:7px; background:var(--green); border-radius:50%; box-shadow:0 0 12px #7ce7b080; }
+    .hero { display:grid; grid-template-columns:1.15fr .85fr; gap:46px; align-items:center; padding:66px 0 54px; }
+    h1 { margin:14px 0 18px; max-width:650px; font-size:clamp(38px,6vw,66px); line-height:1.02; letter-spacing:-.055em; }
+    h1 span { color:var(--cyan); }
+    .intro { max-width:570px; color:var(--muted); font-size:17px; line-height:1.8; margin:0; }
+    .tags { display:flex; flex-wrap:wrap; gap:9px; margin-top:25px; }
+    .tag { border:1px solid #294158; background:#0b1a2a; padding:8px 11px; border-radius:8px; color:#c4d6e9; font-size:12px; }
+    .terminal { border:1px solid #2a455e; background:rgba(7,17,31,.8); border-radius:18px; overflow:hidden; box-shadow:0 24px 70px #0005; transform:rotate(1deg); }
+    .term-head { display:flex; align-items:center; gap:7px; padding:15px 17px; border-bottom:1px solid #20354a; background:#0d1b2b; }
+    .light { width:8px; height:8px; border-radius:50%; background:#f77676; }.light:nth-child(2){background:#f3c66d}.light:nth-child(3){background:#70d7a0}
+    .term-title { margin-left:8px; color:#8da6bf; font:12px ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .term-body { padding:23px 21px 25px; font:13px/2 ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .prompt { color:var(--green); }.command { color:#e4efff; }.comment { color:#7992ab; }.cyan { color:var(--cyan); }
+    .section-label { display:flex; align-items:center; gap:13px; color:#d9e8f7; font-size:13px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; margin-bottom:17px; }
+    .section-label:after { content:""; height:1px; flex:1; background:var(--line); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .card { padding:21px; border:1px solid var(--line); border-radius:14px; background:linear-gradient(145deg,rgba(17,37,57,.95),rgba(9,23,38,.95)); }
+    .number { color:var(--cyan); font-size:12px; font-weight:800; letter-spacing:.08em; }
+    .card h2 { margin:12px 0 8px; font-size:17px; letter-spacing:-.02em; }
+    .card p { color:var(--muted); font-size:13px; line-height:1.7; margin:0; }
+    .flow { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; padding:22px; margin-top:14px; border:1px solid var(--line); border-radius:14px; background:#0a1827; }
+    .node { padding:10px 13px; border:1px solid #2b4d68; border-radius:9px; background:#10283c; color:#dceeff; font:12px ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .arrow { color:var(--cyan); font-weight:800; }
+    .footer { display:flex; justify-content:space-between; align-items:center; gap:15px; margin-top:36px; padding-top:19px; border-top:1px solid rgba(156,176,199,.17); color:#7f96ae; font-size:12px; }
+    .footer strong { color:#dce9f6; font-weight:650; }
+    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:28px;padding:48px 0 40px}.terminal{transform:none}.grid{grid-template-columns:1fr}.topbar{align-items:flex-start}.status{font-size:11px}.footer{align-items:flex-start;flex-direction:column}.shell{width:min(100% - 28px,1080px)}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="whale" aria-hidden="true">▤</div><div><div class="eyebrow">Hands-on DevOps Project</div><div>Docker / Nginx</div></div></div>
+      <div class="status"><span class="dot"></span> Container-ready · Local deployment</div>
+    </header>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">01 / Containerization fundamentals</div>
+        <h1>Docker Nginx<br><span>Web Server</span></h1>
+        <p class="intro">A lightweight static website packaged into a Docker image and served by Nginx. Built locally to practice image creation, container execution, port mapping, and safer container defaults.</p>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Alpine Linux</span><span class="tag">HTML + CSS</span><span class="tag">Non-root runtime</span></div>
+      </div>
+      <div class="terminal" aria-label="Example terminal workflow">
+        <div class="term-head"><span class="light"></span><span class="light"></span><span class="light"></span><span class="term-title">local-terminal — zsh</span></div>
+        <div class="term-body">
+          <div class="comment"># Build the image</div>
+          <div><span class="prompt">$</span> <span class="command">docker build -t docker-nginx:v1 .</span></div>
+          <div class="comment" style="margin-top:10px"># Run the container locally</div>
+          <div><span class="prompt">$</span> <span class="command">docker run -d --name nginx-demo \</span></div>
+          <div>&nbsp;&nbsp;<span class="cyan">-p 8080:8080 docker-nginx:v1</span></div>
+          <div class="comment" style="margin-top:10px"># Open in your browser</div>
+          <div><span class="prompt">$</span> <span class="cyan">http://localhost:8080</span></div>
+          <div style="margin-top:12px;color:#7ce7b0">✓ Ready for local testing</div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="section-label">What this project demonstrates</div>
+      <div class="grid">
+        <article class="card"><div class="number">01 — BUILD</div><h2>Custom image</h2><p>Use a Dockerfile to package the static webpage and Nginx configuration into a repeatable image.</p></article>
+        <article class="card"><div class="number">02 — RUN</div><h2>Container lifecycle</h2><p>Start the container in detached mode, inspect its status, and verify the service through logs and health checks.</p></article>
+        <article class="card"><div class="number">03 — SERVE</div><h2>Port mapping</h2><p>Publish container port 8080 to the local machine so the webpage is accessible in a browser.</p></article>
+      </div>
+      <div class="flow" aria-label="Project workflow"><span class="node">Dockerfile + HTML</span><span class="arrow">→</span><span class="node">Docker Image</span><span class="arrow">→</span><span class="node">Nginx Container</span><span class="arrow">→</span><span class="node">localhost:8080</span></div>
+    </section>
+    <footer class="footer"><span><strong>Built by Tanjim Ahmed</strong> · Learning by building</span><span>Local environment · No EC2 deployment claimed</span></footer>
+  </main>
+>>>>>>> 8ff227a (Update Docker Nginx project and screenshots)
 </body>
 </html>
