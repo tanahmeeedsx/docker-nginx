@@ -23,7 +23,7 @@
 
 This project demonstrates how to containerize a custom HTML webpage using Docker and serve it through an Nginx web server.
 
-I created a custom Docker image named `docker-nginx:v1`, configured Nginx using `nginx.conf`, and ran the application inside a container named `nginx-demo`. The container uses host port `8081` mapped to container port `8080`, making the webpage accessible through a browser.
+I created a custom Docker image named `docker-nginx:v1`, configured Nginx using `nginx.conf`, and ran the application inside a container named `nginx-demo`. The container maps host port `8081` to container port `8080`, making the webpage accessible through a browser.
 
 ## Technologies Used
 
@@ -43,29 +43,29 @@ I created a custom Docker image named `docker-nginx:v1`, configured Nginx using 
 ## Project Architecture
 
 ```text
-             Dockerfile + index.html
-                      |
-                      v
-              Nginx Configuration
-                 nginx.conf
-                      |
-                      v
-                Docker Image
-              docker-nginx:v1
-                      |
-                      v
-               Docker Container
-                  nginx-demo
-                      |
-                      v
-               Nginx Web Server
-                Container :8080
-                      |
-                Port Mapping
-                 Host :8081
-                      |
-                      v
-             http://localhost:8081
+              Dockerfile + index.html
+                       |
+                       v
+               Nginx Configuration
+                  nginx.conf
+                       |
+                       v
+                 Docker Image
+               docker-nginx:v1
+                       |
+                       v
+                Docker Container
+                   nginx-demo
+                       |
+                       v
+                Nginx Web Server
+                 Container :8080
+                       |
+                 Port Mapping
+                  Host :8081
+                       |
+                       v
+              http://localhost:8081
 ```
 
 ## Project Structure
@@ -73,13 +73,14 @@ I created a custom Docker image named `docker-nginx:v1`, configured Nginx using 
 ```text
 docker-nginx/
 ├── Dockerfile
+├── .dockerignore
 ├── index.html
 ├── nginx.conf
 ├── README.md
 └── screenshots/
     ├── 01-docker-setup.png
     ├── 02-container-run.png
-    ├── 03-container-status.png
+    ├── 03-dockerfile.png
     └── 04-nginx-webpage.png
 ```
 
@@ -110,11 +111,20 @@ docker run -d \
 
 ### 3. Dockerfile Configuration
 
-![Dockerfile configuration](screenshots/03-dockerfile.png)
+Reviewed the Dockerfile used to build the custom Nginx image and configure the application container.
+
+```dockerfile
+# Dockerfile configuration
+# See the Dockerfile in the project root for the complete setup.
+```
+
+![Dockerfile Configuration](screenshots/03-dockerfile.png)
 
 ### 4. Access the Nginx Webpage
 
-**Local URL:** http://localhost:8081
+Opened the custom webpage served by Nginx in a browser to verify that the containerized application was accessible.
+
+**Local URL:** [http://localhost:8081](http://localhost:8081)
 
 ![Nginx Webpage](screenshots/04-nginx-webpage.png)
 
@@ -136,8 +146,8 @@ docker run -d \
 ## Key Learnings
 
 - Writing a Dockerfile to build a custom image.
-- Configuring Nginx for a containerized web server.
 - Building and tagging Docker images.
+- Configuring Nginx for a containerized web server.
 - Running containers in detached mode.
 - Understanding host-to-container port mapping.
 - Verifying container health and inspecting logs.
