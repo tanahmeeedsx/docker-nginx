@@ -108,23 +108,13 @@ docker run -d \
 
 ![Docker Container Run](screenshots/02-container-run.png)
 
-### 3. Verify the Running Container
+### 3. Dockerfile Configuration
 
-Checked the container status and port mapping using Docker CLI commands.
-
-```bash
-docker ps
-```
-
-The container was running with a healthy status and the expected port mapping.
-
-![Running Docker Container](screenshots/03-container-status.png)
+![Dockerfile configuration](screenshots/03-dockerfile.png)
 
 ### 4. Access the Nginx Webpage
 
-Opened the custom webpage served by Nginx in a web browser.
-
-**Local URL:** [http://localhost:8081](http://localhost:8081)
+**Local URL:** http://localhost:8081
 
 ![Nginx Webpage](screenshots/04-nginx-webpage.png)
 
